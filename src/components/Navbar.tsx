@@ -9,7 +9,7 @@ import {
 import Link from 'next/link'
 
 
-export default function Navbar(){
+export function Navbar(){
   return (
         <header className="flex justify-end items-center p-4 gap-4 h-16">
             {/* Show the sign-in and sign-up buttons when the user is signed out */}
