@@ -90,14 +90,28 @@ export async function deleteGame(gameId: number){
     revalidatePath("/dashboard");
 }
 
-export async function getPublicGames(){
-    const games = await prisma.game.findMany({
-        where: {
-            isPublic: true
-        }
-    });
-    return games;
-    
+export async function getPublicGames(
+    page: number = 1,
+    limit: number = 10
+){
+    const skip = (page - 1) * limit;
+    const where = { isPublic: true };
+    const [games, total] = await Promise.all([
+        prisma.game.findMany({
+            where,
+            orderBy: {
+                createdAt: "desc"
+            },
+            skip: (page - 1) * limit,
+            take: limit
+        }),
+        prisma.game.count({ where}),
+    ]);
+    return {
+        games,
+        totalPages: Math.ceil(total / limit),
+        currentPage: page,
+    };
 }
 
 

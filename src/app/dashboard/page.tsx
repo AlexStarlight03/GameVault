@@ -3,6 +3,8 @@ import { getUserGames } from "@/actions/game";
 import { GameCard } from "@/components/GameCard";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+
 
 
 type Props = {
@@ -34,7 +36,11 @@ export default async function Dashboard({searchParams}: Props) {
             </p>
           </div>
           
-          {/* Mettre un bouton pour ajouter des jeux */}
+          <Link href="/dashboard/add" passHref>
+            <button className="flex items-center gap-2 bg-[#6c47ff] hover:bg-[#5a3ad6] text-white font-medium rounded-full px-4 py-2 transition-colors">
+              <span className="text-sm font-medium text-white">Ajouter un jeu</span>
+            </button>
+          </Link>
         </div>
 
         {/* Liste des jeux */}
@@ -47,7 +53,11 @@ export default async function Dashboard({searchParams}: Props) {
             <p className="text-gray-500 mb-6">
               Commencez à ajouter des jeux!
             </p>
-            {/* Mettre un bouton pour ajouter des jeux */}
+            <Link href="/dashboard/add" passHref>
+              <button className="flex items-center gap-2 bg-[#6c47ff] hover:bg-[#5a3ad6] text-white font-medium rounded-full px-4 py-2 transition-colors">
+                <span className="text-sm font-medium text-white">Ajouter un jeu</span>
+              </button>
+            </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
